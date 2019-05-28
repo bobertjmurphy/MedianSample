@@ -48,23 +48,25 @@ across transformations:
 
 1. An original movie file was imported into a transcoding utility.
 
-2. The movie was then exported with changes to one or more of:
-- The container format
-- The image resolution
-- The codec
+2. The movie was then exported to a new movie that would have modified contents. In each
+case, involved changes to one or more of:
+ - The container format
+ - The image resolution
+ - The codec
 
-3. Both movies were analyzed with sample_p.
+3. Both the original movie and the modified movie were analyzed with sample_p.
 
-4. Because of the transformations, the two movies couldn't usually be expected to have
-identical keyframe times, or identical median values for the grid. So:
+4. Because of the transformations, the two movies usually couldn't be expected to have
+identical keyframe times, or identical median values for each grid location. So:
 - The pairs of results from step 3 were scanned for similar times
-- Those times' median values were reviewed checked for value and pattern similarity.
+- Those times' median values were reviewed checked to see whether the patterns of
+  values were similar.
 
-Two sets of median values were considered to be "okay" if the differences
+Two sets of median values were considered to "match" if the differences
 were minor, since changes would be inevitable due to slightly different times, and image
 color changes caused by different compression algorithms' color handling and losses.
 
-For example, these two sets of values were considered to be "okay":
+For example, these two sets of values were considered to "match":
 40,59,140,125,80,64,75,83,55,72,47,40,65
 40.04,59,141,126,80,64,76,85,54,72,49,40,66
 
@@ -80,7 +82,7 @@ Four Clips: All are derived from an original 106.3 MB movie
 - four_clips_h265_big.mp4: 240x180, 23.976 fps, QuickTime container, ProRes 422 Proxy codec
 - four_clips.mp4: 960x720, 23.976 fps, MPEG-4 container, AVC/H.264 codec
 
-Some other movies were also tested that were too large, to be suitable for submission
+Some other movies were also tested, but they were too large to be suitable for submission
 to github.
 
 Test Script
@@ -89,14 +91,16 @@ Test Script
 Once sample_p is built as a debug executable, cd to the top-level directory, and run
 test_mac_debug.sh.
 
-This bash script creates a test_results directory, runs sample_p against all the sample movie files
-using a variety of grid dimensions, and puts the results into test_results.
+This bash script creates a test_results directory, runs sample_p against all the
+sample movie files using a variety of grid dimensions, and puts the results into
+test_results.
 
-test_mac_debug.sh runs both positive tests, where sample_p is expected to succeed, and negative
-tests, where it's expected to fail due to invalid grid dimensions.
+test_mac_debug.sh runs both positive tests, where sample_p is expected to succeed, and
+negative tests, where it's expected to fail due to invalid grid dimensions.
 
 The results from this were verified by:
 - Examining all results from the same movie set, and that use the same grid dimensions
 - Compare those result files
-- Spot-check some similar keyframe times to make sure the median value patterns were similar
+- Spot-check some similar keyframe times to make sure the median value patterns were
+  similar
 
