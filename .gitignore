@@ -30,3 +30,18 @@
 *.exe
 *.out
 *.app
+sample_p
+
+# Directories
+xcuserdata/
+test_results/
+macbuild/
+
+# Other
+.DS_Store
+*.xcuserstate
+
+
+
+
+
