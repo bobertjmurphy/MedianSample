@@ -48,15 +48,19 @@ across transformations:
 
 1. An original movie file was imported into a transcoding utility.
 
-2. The movie was then exported using a different container format, image resoltion, and
-codec.
+2. The movie was then exported with changes to one or more of:
+- The container format
+- The image resolution
+- The codec
 
 3. Both movies were analyzed with sample_p.
 
 4. Because of the transformations, the two movies couldn't usually be expected to have
-identical keyframe times, or identical median values for the grid. So the pairs of results
-from step 3 were scanned for similar times nd such times' median values were reviewed for
-similarity. Two sets of median values were considered to be "okay" if the differences
+identical keyframe times, or identical median values for the grid. So:
+- The pairs of results from step 3 were scanned for similar times
+- Those times' median values were reviewed checked for value and pattern similarity.
+
+Two sets of median values were considered to be "okay" if the differences
 were minor, since changes would be inevitable due to slightly different times, and image
 color changes caused by different compression algorithms' color handling and losses.
 
@@ -64,7 +68,7 @@ For example, these two sets of values were considered to be "okay":
 40,59,140,125,80,64,75,83,55,72,47,40,65
 40.04,59,141,126,80,64,76,85,54,72,49,40,66
 
-The git repository contains these sets of movies that passed this kind of check:
+The git repository contains two sets of movies that passed this kind of check:
 
 Festival:
 - festival_1.mp4: The original file, 568x320, 30 fps, MPEG-4 container, AVC/H.264 codec
@@ -94,5 +98,5 @@ tests, where it's expected to fail due to invalid grid dimensions.
 The results from this were verified by:
 - Examining all results from the same movie set, and that use the same grid dimensions
 - Compare those result files
-- Spot-check some simlar keyframe times to make sure the median value patterns were similar
+- Spot-check some similar keyframe times to make sure the median value patterns were similar
 
